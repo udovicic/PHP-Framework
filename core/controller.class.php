@@ -18,6 +18,9 @@ abstract class Controller
 /** @var object Points to template engine class */
     protected $_template;
 
+/** @var bool Render template without header and footer */
+    public $withoutHeader;
+
 /**
  * Constructior function for Controller class
  *
@@ -29,6 +32,8 @@ abstract class Controller
  */
     function __construct($model, $controller, $action)
     {
+        $this->withoutHeader = 0;
+        
         $this->_model = $model;
         $this->_controller = $controller;
         $this->_action = $action;
@@ -55,6 +60,6 @@ abstract class Controller
  */
     function __destruct()
     {
-        $this->_template->render();
+        $this->_template->render($withoutHeader);
     }
 }

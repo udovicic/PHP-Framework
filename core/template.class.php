@@ -41,26 +41,32 @@ class Template
 
 /**
  * Renders template to user
+ *
+ * @param bool $noHeader If true, header and footer won't be rendered (i.e. for Ajax calls)
  */
-    function render()
+    function render($noHeader = false)
     {
         extract($this->_variables);
 
         // header
-        if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php')) {
-            include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php');
-        } else {
-            include(ROOT . DS . 'application' . DS . 'views' . DS . 'header.php');
+        if ($noHeader) {
+            if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php')) {
+                include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php');
+            } else {
+                include(ROOT . DS . 'application' . DS . 'views' . DS . 'header.php');
+            }
         }
 
         // body
         include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . $this->_action . '.php');
 
         // fotter
-        if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php')) {
-            include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php');
-        } else {
-            include(ROOT . DS . 'application' . DS . 'views' . DS . 'footer.php');
+        if ($noHeader) {
+            if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php')) {
+                include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php');
+            } else {
+                include(ROOT . DS . 'application' . DS . 'views' . DS . 'footer.php');
+            }
         }
     }
 }

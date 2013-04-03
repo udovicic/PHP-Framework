@@ -33,20 +33,27 @@ function callHook()
 {
     global $url; // defined in public/index.php
 
-    $urlArray = array();
-    $urlArray = explode("/", $url);
+    if ($url == "") {
+        global $default;
 
-    $controller = $urlArray[0];
-    array_shift($urlArray);
-    $action = $urlArray[0];
-    array_shift($urlArray);
-    $queryString = $urlArray;
+        $controller = $default['controller'];
+        $action = $default['action'];
+    } else {
+        $urlArray = array();
+        $urlArray = explode("/", $url);
+
+        $controller = $urlArray[0];
+        array_shift($urlArray);
+        $action = $urlArray[0];
+        array_shift($urlArray);
+        $queryString = $urlArray;
+    }
 
     $controllerName = $controller;
     $controller = ucwords($controller);
     $model = rtrim($controller, 's');
     $controller .= 'Controller';
-    $dispatch = new $controller($model, $controllerName. $action);
+    $dispatch = new $controller($model, $controllerName, $action);
 
     if ((int)method_exists($controller, $action)) {
         call_user_func_array(array($dispatch, $action), queryString);

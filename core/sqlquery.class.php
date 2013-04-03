@@ -101,7 +101,7 @@ abstract class SQLQuery {
     {
         $sql = 'SELECT * FROM :table';
         $param = array(
-            'table' => $this->_table;
+            'table' => $this->_table
         );
 
         return query($sql, $param);
