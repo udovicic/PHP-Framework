@@ -2,7 +2,7 @@
 /**
  * Request collector
  *
- * This page is single entry point for all requests made by the application
+ * This page is the single entry point for all requests made by the application
  */
 
 /** directory separator string */

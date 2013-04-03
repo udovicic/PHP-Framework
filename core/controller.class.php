@@ -2,7 +2,7 @@
 /**
  * Abstract controller
  *
- * Abstraction class for controllers used in aplication
+ * Abstraction class for controllers used in application
  */
 abstract class Controller
 {
@@ -22,13 +22,13 @@ abstract class Controller
     public $withoutHeader;
 
 /**
- * Constructior function for Controller class
+ * Constructor function for Controller class
  *
- * Constrcts new model and template class
+ * Constructs new model and template class
  *
  * @param string $model Name of model class to be used
  * @param string $controller Name of controller class to be used
- * @param string $action Name of function which is to be executed
+ * @param string $action Name of function to be executed
  */
     function __construct($model, $controller, $action)
     {
@@ -43,7 +43,7 @@ abstract class Controller
     }
 
 /**
- * Passes variables to template class
+ * Passes variables on to template class
  *
  * @param string $name Name of variable in template
  * @param mixed $value Value of given variable

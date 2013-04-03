@@ -15,7 +15,7 @@ abstract class SQLQuery {
 /**
  * Connect to a database
  *
- * Opens connection to a database specified by parameters
+ * Opens connection to a database specified by the parameters
  *
  * @param string $host Database server address
  * @param string $user Database user
@@ -47,8 +47,8 @@ abstract class SQLQuery {
  * Perform SQL query
  *
  * @param string $query SQL query which should be executed
- * @param array $param Optional parameteres for prepared statements
- * @return mixed Associative array containing query result(s), or false on error or empty result
+ * @param array $param Optional parameters for prepared statements
+ * @return mixed Associative array containing query result(s), or false in case of error, or empty result
  */
     function query($query, $param = null)
     {
@@ -72,12 +72,12 @@ abstract class SQLQuery {
     }
 
 /**
- * Retrieve row with specific id
+ * Retrieves row with specific id
  *
- * Retreives row with specific id from table specified by attached models name
+ * Retreives row with specific id from table specified by attached model's name
  *
  * @param mixed $id Row id
- * @return array Associative array containg single result from table, or false on error
+ * @return array Associative array containing single result from table, or false in case of error, or empty result
  */
     function select($id)
     {
@@ -93,9 +93,9 @@ abstract class SQLQuery {
 /**
  * Retreives all rows from table
  *
- * Retrieves all rows from table specified by attached models name
+ * Retrieves all rows from table specified by attached model's name
  *
- * @return array Associative array containg all table entries, or false on error
+ * @return array Associative array containing all table entries, or false in case of error, or empty result
  */
     function selectAll()
     {

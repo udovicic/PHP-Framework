@@ -2,7 +2,7 @@
 /**
  * Basic functionality
  *
- * Core functions for including other source files, loading aditional classes and so forth
+ * Core functions for including other source files, loading additional classes and so forth
  */
 
 /**
@@ -27,7 +27,7 @@ function setReporting()
 /**
  * Main call function
  *
- * Analyze url request and calls requested controller function
+ * Analyzes url requests and calls requested controller function
  */
 function callHook()
 {
@@ -67,7 +67,7 @@ function callHook()
  *
  * Searches for the source file of requested class
  *
- * @param string $className Name of class which is to be loaded
+ * @param string $className Name of class to be loaded
  */
 function __autoload($className)
 {
