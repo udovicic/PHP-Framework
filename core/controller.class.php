@@ -26,17 +26,18 @@ abstract class Controller
  *
  * Constructs new model and template class
  *
- * @param string $model Name of model class to be used
  * @param string $controller Name of controller class to be used
  * @param string $action Name of function to be executed
  */
-    function __construct($model, $controller, $action)
+    function __construct($controller, $action)
     {
+        global $inflect;
+
         $this->withoutHeader = 0;
         
-        $this->_model = $model;
-        $this->_controller = $controller;
+        $this->_controller = ucfirst($controller);
         $this->_action = $action;
+        $this->_model = ucfirst($inflect->singularize($controller));
 
         $this->$model = new $model;
         $this->_template = new Template($controller, $action);

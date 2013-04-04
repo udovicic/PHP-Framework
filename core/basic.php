@@ -49,11 +49,8 @@ function callHook()
         $queryString = $urlArray;
     }
 
-    $controllerName = $controller;
-    $controller = ucwords($controller);
-    $model = rtrim($controller, 's');
-    $controller .= 'Controller';
-    $dispatch = new $controller($model, $controllerName, $action);
+    $controllerName = ucwords($controller) . 'Controller';
+    $dispatch = new $controllerName($controller, $action);
 
     if ((int)method_exists($controller, $action)) {
         call_user_func_array(array($dispatch, $action), queryString);
@@ -81,6 +78,8 @@ function __autoload($className)
         // Error Generation Code
     }
 }
+
+$inflect = new Inflection();
 
 setReporting();
 callHook();
