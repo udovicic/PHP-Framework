@@ -38,6 +38,7 @@ function callHook()
 
         $controller = $default['controller'];
         $action = $default['action'];
+        $queryString = $default['query'];
     } else {
         $urlArray = array();
         $urlArray = explode("/", $url);

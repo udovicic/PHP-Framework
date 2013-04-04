@@ -5,3 +5,4 @@
 
 $default['controller'] = "";
 $default['action'] = "";
+$default['query'] = array();
