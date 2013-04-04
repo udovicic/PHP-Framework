@@ -6,6 +6,9 @@
 /** Sets type of environment */
 define('DEVELOPMENT', true);
 
+/** Stores site base url */
+define('PAGE_URL', '');
+
 /** Database host address */
 define('DB_HOST', '');
 /** Database user */

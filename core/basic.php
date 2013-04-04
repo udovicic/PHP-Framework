@@ -52,9 +52,10 @@ function callHook()
     $controllerName = ucwords($controller) . 'Controller';
     $dispatch = new $controllerName($controller, $action);
 
-    if ((int)method_exists($controller, $action)) {
-        call_user_func_array(array($dispatch, $action), queryString);
+    if ((int)method_exists($controllerName, $action)) {
+        call_user_func_array(array($dispatch, $action), $queryString);
     } else {
+        die('Requested method doesn\'t exist:' . $action);
         // Error Generation Code
     }
 }

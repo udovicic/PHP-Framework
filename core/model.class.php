@@ -16,6 +16,8 @@ abstract class Model extends SQLQuery
  */
     function __construct()
     {
+        global $inflect;
+
         $this->connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         $this->_model = get_class($this);
         $this->_table = strtolower($inflect->pluralize($this->_model));
@@ -28,6 +30,6 @@ abstract class Model extends SQLQuery
  */
     function __destruct()
     {
-        $this->disconect();
+        $this->disconnect();
     }
 }

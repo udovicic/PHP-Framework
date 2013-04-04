@@ -33,13 +33,14 @@ abstract class Controller
     {
         global $inflect;
 
-        $this->withoutHeader = 0;
+        $this->withoutHeader = false;
         
         $this->_controller = ucfirst($controller);
         $this->_action = $action;
-        $this->_model = ucfirst($inflect->singularize($controller));
-
+        
+        $model = ucfirst($inflect->singularize($controller));
         $this->$model = new $model;
+
         $this->_template = new Template($controller, $action);
     }
 
@@ -61,6 +62,6 @@ abstract class Controller
  */
     function __destruct()
     {
-        $this->_template->render($withoutHeader);
+        $this->_template->render($this->withoutHeader);
     }
 }

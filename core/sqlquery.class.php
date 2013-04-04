@@ -28,9 +28,10 @@ abstract class SQLQuery {
         try {
             $this->_dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
             $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->_dbh->setFetchMode(PDO::FETCH_ASSOC);
+            $this->_dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             return true;
         } catch (PDOException $ex) {
+            throw new Exception($ex->getMessage());
             return false;
         }
     }
@@ -65,8 +66,15 @@ abstract class SQLQuery {
                 return false;
             }
 
-            return $stmt->fetchAll();
+            if (preg_match("/select/i", $query)) {// SELECT statment was used
+                $result = $stmt->fetchAll();
+            } else {
+                $result = true;
+            }
+
+            return $result;
         } catch (PDOException $ex) {
+            throw new Exception($ex->getMessage());
             return false;
         }
     }
@@ -81,13 +89,13 @@ abstract class SQLQuery {
  */
     function select($id)
     {
-        $sql = 'SELECT * FROM :table WHERE id=:id';
+        $sql = 'SELECT * FROM ' . $this->_table . ' WHERE id=:id';
         $param = array(
-            'table' => $this->_table,
-            'id' => $id
+            'id' => $id,
         );
-
-        return query($sql, $param);
+        $result = $this->query($sql, $param);
+        
+        return $result[0];
     }
 
 /**
@@ -99,12 +107,9 @@ abstract class SQLQuery {
  */
     function selectAll()
     {
-        $sql = 'SELECT * FROM :table';
-        $param = array(
-            'table' => $this->_table
-        );
+        $sql = 'SELECT * FROM ' .$this->_table;
 
-        return query($sql, $param);
+        return $this->query($sql);
     }
 
 /**
