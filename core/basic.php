@@ -68,8 +68,8 @@ function callHook()
  */
 function __autoload($className)
 {
-    if (file_exists(ROOT . DS . 'core' . DS . strtolower($className) . DS . '.class.php')) {
-        require_once(ROOT . DS . 'core' . DS . strtolower($className) . DS . '.class.php');
+    if (file_exists(ROOT . DS . 'core' . DS . strtolower($className) . '.class.php')) {
+        require_once(ROOT . DS . 'core' . DS . strtolower($className) . '.class.php');
     } else if (file_exists(ROOT . DS . 'application' . DS . 'controllers' . DS . strtolower($className) . '.php')) {
         require_once(ROOT . DS . 'application' . DS . 'controllers' . DS . strtolower($className) . '.php');
     } else if (file_exists(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php')) {
@@ -79,7 +79,7 @@ function __autoload($className)
     }
 }
 
-$inflect = new Inflection();
+$inflect = new Inflection;
 
 setReporting();
 callHook();
