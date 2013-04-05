@@ -56,8 +56,7 @@ function callHook()
     if ((int)method_exists($controllerName, $action)) {
         call_user_func_array(array($dispatch, $action), $queryString);
     } else {
-        die('Requested method doesn\'t exist:' . $action);
-        // Error Generation Code
+        throw new Exception('Action ' . $action . ' doesn\'t exists in ' . $controllerName);
     }
 }
 
@@ -77,7 +76,7 @@ function __autoload($className)
     } else if (file_exists(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php')) {
         require_once(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php');
     } else {
-        // Error Generation Code
+        throw new Exception('No source for ' . $className . ' found');
     }
 }
 
