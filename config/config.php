@@ -7,7 +7,7 @@
 define('DEVELOPMENT', true);
 
 /** Stores site base url */
-define('PAGE_URL', '');
+define('SITE_URL', '');
 
 /** Database host address */
 define('DB_HOST', '');

@@ -43,14 +43,14 @@ class Template
 /**
  * Renders template to user
  *
- * @param bool $noHeader If true, header and footer won't be rendered (i.e. for Ajax calls)
+ * @param bool $renderHeader If false, header and footer will be omitted in rendering process
  */
-    function render($noHeader = false)
+    function render($renderHeader = true)
     {
         extract($this->_variables);
         
         // header
-        if ($noHeader == false) {
+        if ($renderHeader) {
             if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php')) {
                 include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'header.php');
             } else {
@@ -62,7 +62,7 @@ class Template
         include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . $this->_action . '.php');
 
         // fotter
-        if (!$noHeader == false) {
+        if ($renderHeader) {
             if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php')) {
                 include(ROOT . DS . 'application' . DS . 'views' . DS . $this->_controller . DS . 'footer.php');
             } else {

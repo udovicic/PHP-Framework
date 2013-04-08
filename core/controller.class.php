@@ -18,8 +18,11 @@ abstract class Controller
 /** @var object Points to template engine class */
     protected $_template;
 
+/** @var bool If true, page will be displayed */
+    public $renderPage;
+
 /** @var bool Render template without header and footer */
-    public $withoutHeader;
+    public $renderHeader;
 
 /**
  * Constructor function for Controller class
@@ -33,7 +36,8 @@ abstract class Controller
     {
         global $inflect;
 
-        $this->withoutHeader = false;
+        $this->renderPage = true;
+        $this->renderHeader = true;
         
         $this->_controller = ucfirst($controller);
         $this->_action = $action;
@@ -62,6 +66,8 @@ abstract class Controller
  */
     function __destruct()
     {
-        $this->_template->render($this->withoutHeader);
+        if ($this->renderPage) {
+            $this->_template->render($this->renderHeader);
+        }
     }
 }
