@@ -32,7 +32,7 @@ class Template
 /**
  * Stores variables used on template
  *
- * @param string $name Variables name
+ * @param string $name Variable name
  * @param mixed $value Value of given variable
  */
     function set($name, $value)

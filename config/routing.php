@@ -3,6 +3,13 @@
  * Default site routing
  */
 
-$default['controller'] = "";
-$default['action'] = "";
-$default['query'] = array();
+$routing_default['controller'] = "";
+$routing_default['action'] = "";
+$routing_default['query'] = array();
+
+/**
+ * User login page
+ */
+$routing_user['controller'] = "";
+$routing_user['action'] = "";
+$routing_user['query'] = array();

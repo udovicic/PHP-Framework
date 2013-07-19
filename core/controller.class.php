@@ -18,6 +18,9 @@ abstract class Controller
 /** @var object Points to template engine class */
     protected $_template;
 
+/** @var bool True if controller requires user to be logged in **/
+	public $requireUser;
+	
 /** @var bool If true, page will be displayed */
     public $renderPage;
 
@@ -38,7 +41,9 @@ abstract class Controller
 
         $this->renderPage = true;
         $this->renderHeader = true;
-        
+    	
+		$this->requireUser = false;
+		    
         $this->_controller = ucfirst($controller);
         $this->_action = $action;
         

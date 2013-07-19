@@ -32,13 +32,14 @@ function setReporting()
 function callHook()
 {
     global $url; // defined in public/index.php
+    $user = new User;
 
     if ($url == "") {
-        global $default;
+        global $routing_default;
 
-        $controller = $default['controller'];
-        $action = $default['action'];
-        $queryString = $default['query'];
+        $controller = $routing_default['controller'];
+        $action = $routing_default['action'];
+        $queryString = $routing_default['query'];
     } else {
         $urlArray = array();
         $urlArray = explode("/", $url);
@@ -52,6 +53,18 @@ function callHook()
 
     $controllerName = ucwords($controller) . 'Controller';
     $dispatch = new $controllerName($controller, $action);
+
+    if ($dispatch->requireUser == true && $user->isLoggedIn == false) {
+        // deny access for requested action
+        global $routing_user;
+
+        $controller = $routing_user['controller'];
+        $action = $routing_user['action'];
+        $queryString = $routing_user['query'];
+
+        $controllerName = ucwords($controller) . 'Controller';
+        $dispatch = new $controllerName($controller, $action);
+    }
 
     if ((int)method_exists($controllerName, $action)) {
         call_user_func_array(array($dispatch, $action), $queryString);

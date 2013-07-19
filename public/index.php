@@ -4,6 +4,7 @@
  *
  * This page is the single entry point for all requests made by the application
  */
+session_start();
 
 /** directory separator string */
 define('DS', DIRECTORY_SEPARATOR);
