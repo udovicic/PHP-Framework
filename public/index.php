@@ -13,4 +13,4 @@ define('ROOT', dirname(dirname(__FILE__)));
 
 $url = isset($_GET['url']) == true ? $_GET['url'] : "";
 
-require_once(ROOT . DS . 'core' . DS . 'bootstrap.php');
+require_once(ROOT . DS . 'lib' . DS . 'bootstrap.php');
