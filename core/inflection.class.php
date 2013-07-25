@@ -1,4 +1,7 @@
 <?php
+
+namespace Core;
+
 /**
  * This class has been taken from
  * http://kuwamoto.org/2007/12/17/improved-pluralizing-in-php-actionscript-and-ror

@@ -32,7 +32,7 @@ function setReporting()
 function callHook()
 {
     global $url; // defined in public/index.php
-    $user = new User;
+    $user = new Core\User;
 
     if ($url == "") {
         global $routing_default;
@@ -54,9 +54,12 @@ function callHook()
     $controllerName = ucwords($controller) . 'Controller';
     $dispatch = new $controllerName($controller, $action);
 
-    if ($dispatch->requireUser == true && $user->isLoggedIn == false) {
+    if ($dispatch->requireUser == true && $user->isLoggedIn() == false) {
         // deny access for requested action
         global $routing_user;
+
+        // disable rendering of requested page
+        $dispatch->renderPage = false;
 
         $controller = $routing_user['controller'];
         $action = $routing_user['action'];

@@ -1,10 +1,12 @@
 <?php
+
+namespace Core;
 /**
  * Abstract model
  *
  * Abstraction class for models used in aplication
  */
-abstract class Model extends SQLQuery
+abstract class Model extends Core\SQLQuery
 {
 /** @var string Stores model name */
     protected $_model;

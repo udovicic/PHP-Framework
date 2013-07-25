@@ -1,5 +1,6 @@
 <?php
 
+namespace Core;
 /**
  * User management class
  *
@@ -7,8 +8,8 @@
  */
 class User
 {
-/** @var bool True if user is loged in */
-	public $isLogedIn;
+/** @var bool False if user is not loged in */
+	private $_loggedIn;
 
 /** @var array Stores custom fields */
 	private $_variables;
@@ -21,31 +22,53 @@ class User
  */
 	function __construct()
 	{
+		$this->_variables = array();
+
 		if (isset($_SESSION['_user']['logged_in'])  == true) {
-			$this->isLogedIn = $_SESSION['_user']['logged_in'];
+			$this->_loggedIn = $_SESSION['_user']['logged_in'];
 		} else {
-			$this->isLogedIn = false;
+			$this->_loggedIn = false;
 		}
 
-		if ($this->isLogedIn == true) {
+		if ($this->_loggedIn == true) {
 			$this->_variables = $_SESSION['_user']['variables'];
 		}
 	}
 
 /**
- * Destructor function for User class
+ * Mark user as logged in or out
  *
- * Handles data storage into session
+ * @param bool $status true if user is logged in
  */
-	function __destruct()
+	function setLogedIn($status)
 	{
-		$_SESSION['_user']['logged_in'] = $this->isLogedIn;
+		if ($status == false) {
+			$this->_loggedIn = false;
+			$this->_variables = array();
 
-		if ($this->isLogedIn == true) {
-			$_SESSION['_user']['variables'] = $this->_variables;
+			$_SESSION['_user']['logged_in'] = false;
+			$_SESSION['_user']['variables'] = array();
+		} else {
+			$this->_loggedIn = $status;
+
+			$_SESSION['_user']['logged_in'] = $status;
 		}
+
 	}
 
+/**
+ * User login status
+ *
+ * @return bool False if user is not logged in
+ */
+	function isLoggedIn()
+	{
+		if ($this->_loggedIn == false) {
+			return false;
+		} else {
+			return $this->_loggedIn;
+		}
+	}
 /**
  * Handles custom variable storage
  *
@@ -65,7 +88,7 @@ class User
  */
 	function get($name)
 	{
-		if (array_key_exists($name) == true) {
+		if (array_key_exists($name, $this->_variables) == true) {
 			$value = $this->_variables[$name];
 		} else {
 			$value = false;

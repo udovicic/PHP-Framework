@@ -1,4 +1,7 @@
 <?php
+
+namespace Core;
+
 /**
  * Abstract controller
  *
