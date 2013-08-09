@@ -1,6 +1,6 @@
 <?php
 
-//namespace Core;
+namespace Core;
 
 /**
  * This class has been taken from

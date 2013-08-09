@@ -87,7 +87,7 @@ function __autoload($className)
 {
     // replace namespace separator with directory separator
     $className = str_replace("\\", DS, $className);
-    
+
     if (file_exists(ROOT . DS . 'lib' . DS . strtolower($className) . '.class.php')) {
         require_once(ROOT . DS . 'lib' . DS . strtolower($className) . '.class.php');
     } else if (file_exists(ROOT . DS . 'application' . DS . 'controllers' . DS . strtolower($className) . '.php')) {

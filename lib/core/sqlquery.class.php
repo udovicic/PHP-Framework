@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use PDO;
 /**
  * Database abstraction layer
  *
@@ -27,7 +28,7 @@ abstract class SQLQuery {
     function connect($host, $user, $password, $dbname)
     {
         try {
-            $this->_dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
+            $this->_dbh = new \PDO("mysql:host=$host;dbname=$dbname", $user, $password);
             $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->_dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             return true;

@@ -6,7 +6,7 @@ namespace Core;
  *
  * Abstraction class for models used in aplication
  */
-abstract class Model extends Core\SQLQuery
+abstract class Model extends SQLQuery
 {
 /** @var string Stores model name */
     protected $_model;
