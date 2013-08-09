@@ -22,16 +22,8 @@ class User
  */
 	function __construct()
 	{
-		$this->_variables = array();
-
-		if (isset($_SESSION['_user']['logged_in'])  == true) {
-			$this->_loggedIn = $_SESSION['_user']['logged_in'];
-		} else {
-			$this->_loggedIn = false;
-		}
-
-		if ($this->_loggedIn == true) {
-			$this->_variables = $_SESSION['_user']['variables'];
+		if (isset($_SESSION['_user']['logged_in'])  == false) {
+			$_SESSION['_user']['logged_in'] = false;
 		}
 	}
 
@@ -40,20 +32,10 @@ class User
  *
  * @param bool $status true if user is logged in
  */
-	function setLogedIn($status)
+	function setLoggedIn($status)
 	{
-		if ($status == false) {
-			$this->_loggedIn = false;
-			$this->_variables = array();
-
-			$_SESSION['_user']['logged_in'] = false;
-			$_SESSION['_user']['variables'] = array();
-		} else {
-			$this->_loggedIn = $status;
-
-			$_SESSION['_user']['logged_in'] = $status;
-		}
-
+		$_SESSION['_user']['logged_in'] = $status;
+		$_SESSION['_user']['variables'] = array();
 	}
 
 /**
@@ -63,11 +45,7 @@ class User
  */
 	function isLoggedIn()
 	{
-		if ($this->_loggedIn == false) {
-			return false;
-		} else {
-			return $this->_loggedIn;
-		}
+		return $_SESSION['_user']['logged_in'];
 	}
 /**
  * Handles custom variable storage
@@ -77,7 +55,7 @@ class User
  */
 	function set($name, $value)
 	{
-		$this->_variables[$name] = $value;
+		$_SESSION['_user']['variables'][$name] = $value;
 	}
 
 /**
@@ -88,8 +66,8 @@ class User
  */
 	function get($name)
 	{
-		if (array_key_exists($name, $this->_variables) == true) {
-			$value = $this->_variables[$name];
+		if (array_key_exists($name, $_SESSION['_user']['variables']) == true) {
+			$value = $_SESSION['_user']['variables'][$name];
 		} else {
 			$value = false;
 		}
