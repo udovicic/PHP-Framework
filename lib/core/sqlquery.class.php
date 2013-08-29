@@ -76,7 +76,6 @@ abstract class SQLQuery {
 
             return $result;
         } catch (PDOException $ex) {
-            throw new Exception($ex->getMessage());
             return false;
         }
     }
